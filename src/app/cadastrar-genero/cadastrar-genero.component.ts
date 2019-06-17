@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { GenerosService } from '../generos.service';
+import { ValicacaoFormUtilService } from '../valicacao-form-util.service';
 
 @Component({
   selector: 'app-cadastrar-genero',
@@ -7,9 +9,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CadastrarGeneroComponent implements OnInit {
 
-  constructor() { }
+  nome = null;
+
+  constructor(private generos$: GenerosService,
+    private validacao$: ValicacaoFormUtilService) { }
 
   ngOnInit() {
+  }
+
+  salvar() {
+    this.generos$.cadastrar(this.nome)
+      .subscribe(
+        data => this.validacao$.erro = false,
+        err => this.validacao$.erro = err.error
+      );
   }
 
 }

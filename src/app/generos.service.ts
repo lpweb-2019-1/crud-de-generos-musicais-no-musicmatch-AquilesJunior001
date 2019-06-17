@@ -36,6 +36,12 @@ export class GenerosService extends DadosBaseService {
     return this.http.get(this.URL.concat(`${id}/`));
   }
 
+  cadastrar(nome) {
+    let formData: FormData = new FormData();
+    formData.append('nome', nome);
+    return this.http.post(this.URL, formData);
+    }
+
   editar(id, nome) {
     let formData: FormData = new FormData();
     formData.append('nome', nome);
